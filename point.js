@@ -8,14 +8,14 @@ export default class Point {
 
     // Adds the point position in the array of positions
     plot(x, y) {
-        pos.push({x: x, y: y});
+        this.pos.push({x: x, y: y});
     }
 
     // Cleanse the array of positions
     erase() {
-        pos = {};
+        this.pos = {};
     }
 
     // Returns the array of positions
-    getPos() { return pos; }
+    getPos() { return this.pos; }
 }

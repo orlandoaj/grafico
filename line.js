@@ -3,7 +3,7 @@ import Point from './point.js';
 
 export default class Line extends Point {
 
-    constructor(x, y, z, x2, y2, thickness, rgb) {
+	constructor(x, y, z, x2, y2, thickness, rgb) {
 		super(x, y, z, thickness, rgb);
     }
 
@@ -11,18 +11,18 @@ export default class Line extends Point {
 	genPos() {
 
 		// Delta of exact value and rounded value of the dependent variable
-		d = 0;
+		this.d = 0;
 
-		dx = Math.abs(x2 - x); // Delta X
-		dy = Math.abs(y2 - y); // Delta Y
+		this.dx = Math.abs(this.x2 - this.x); // Delta X
+		this.dy = Math.abs(this.y2 - this.y); // Delta Y
 
-		dx2 = 2 * dx; // Slope scaling factors to
-		dy2 = 2 * dy; // avoid floating point
+		this.dx2 = 2 * this.dx; // Slope scaling factors to
+		this.dy2 = 2 * this.dy; // avoid floating point
 
-		ix = x < x2 ? 1 : -1; // Increment direction
-		iy = y < y2 ? 1 : -1;
+		this.ix = this.x < this.x2 ? 1 : -1; // Increment direction
+		this.iy = this.y < this.y2 ? 1 : -1;
 
-		if (dx >= dy)
+		if (this.dx >= this.dy)
 			otherDegrees();
 		else
 			ninetyDegrees();
@@ -32,13 +32,13 @@ export default class Line extends Point {
 	// first, fourth, fifth and eighth octets
 	otherDegrees() {
 
-		while (x != x2) {
-			plot(x, y);
-			x += ix;
-			d += dy2;
-			if (d > dx) {
-				y += iy;
-				d -= dx2;
+		while (this.x != this.x2) {
+			plot(this.x, this.y);
+			this.x += this.ix;
+			this.d += this.dy2;
+			if (this.d > this.dx) {
+				this.y += this.iy;
+				this.d -= this.dx2;
 			}
 		}
 	}
@@ -47,13 +47,13 @@ export default class Line extends Point {
 	// second, third, sixth and seventh octets
 	ninetyDegrees() {
 
-		while (y != y2) {
-			plot(x, y);
-			y += iy;
-			d += dx2;
-			if (d > dy) {
-				x += ix;
-				d -= dy2;
+		while (this.y != this.y2) {
+			plot(this.x, this.y);
+			this.y += this.iy;
+			this.d += this.dx2;
+			if (this.d > this.dy) {
+				this.x += this.ix;
+				this.d -= this.dy2;
 			}
 		}
 	}
@@ -62,6 +62,6 @@ export default class Line extends Point {
 	update() { genPos(); }
 
     // Returns the array of positions
-    draw() { return getPos(); }
+    draw() {  getPos(); }
 
 }
